@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 @SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
+
     RecyclerView recyclerView;
 
     private final String JSON_URL = "HTTPS_URL_TO_JSON_DATA_CHANGE_THIS_URL";
