@@ -1,17 +1,16 @@
 package com.example.networking;
 
-public class MyViewHolder {
+import android.view.View;
+import android.widget.TextView;
 
-    @SuppressWarnings("WeakerAccess")
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-        private String title;
+public class MyViewHolder extends RecyclerView.ViewHolder{
+    public TextView title;
 
-        public MyViewHolder (String title) {
-            this.title = title;
-        }
-
-        public String getTitle() {
-            return title;
-        }
+    public MyViewHolder(@NonNull View itemView) {
+        super(itemView);
+        title = itemView.findViewById(R.id.title);
     }
-
+}
