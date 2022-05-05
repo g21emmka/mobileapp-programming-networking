@@ -14,4 +14,4 @@ public class MyViewHolder {
             return title;
         }
     }
-}
+
