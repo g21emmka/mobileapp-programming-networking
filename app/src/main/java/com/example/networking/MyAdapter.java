@@ -8,10 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class MyAdapter extends RecyclerView.Adapter <MyViewHolder> {
 
     List <String>mountains = Arrays.asList("K2", "Billingen", "Dundret", "Kebnekaise","Mount Everest");
+
+    public void setMountains(List<String> mountains) {
+        this.mountains = mountains;
+    }
 
     @NonNull
     @Override
