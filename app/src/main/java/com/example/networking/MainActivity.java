@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
     RecyclerView recyclerView;
 
+    private MyAdapter adapter;
+
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=brom";
     private final String JSON_FILE = "mountains.json";
 
@@ -26,10 +28,11 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        adapter = new MyAdapter();
         new JsonTask(this).execute(JSON_URL);
 
         recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(new MyAdapter());
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager( this));
     }
 
@@ -39,10 +42,16 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Gson gson = new Gson();
         Mountains mountains[];
         mountains = gson.fromJson(json, Mountains[].class);
-        for (int i = 0; 1 < mountains.length; i++) {
+        List<Mountains> newMountains = new ArrayList<>();
+        for (int i = 0; i < mountains.length; i++) {
             Log.d("MainActivity ==>", "Hittade ett berg:" +mountains[i].getName());
+            newMountains.add(mountains[i]);
         }
         Log.d("MainActivity", json);
+        adapter.setMountains(newMountains);
+        adapter.notifyDataSetChanged();
+
+
     }
 
 }

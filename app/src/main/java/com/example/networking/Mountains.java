@@ -25,7 +25,9 @@ public class Mountains {
     private int size;
     private int cost;
     private Auxdata auxdata;
-
+    public Mountains(String name){
+        this.name = name;
+    }
     public String getName() {
         return name;
     }
