@@ -22,9 +22,11 @@ public class Mountains {
     private String company;
     private String location;
     private String category;
-    private String location;
-    private String size;
+    private int size;
     private int cost;
-    private int location;
     private Auxdata auxdata;
+
+    public String getName() {
+        return name;
+    }
 }

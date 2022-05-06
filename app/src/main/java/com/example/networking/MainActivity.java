@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Mountains mountains[];
         mountains = gson.fromJson(json, Mountains[].class);
         for (int i = 0; 1 < mountains.length; i++) {
-            Log.d("MainActivity ==>", "Hittade ett berg:" +mountains[i])
+            Log.d("MainActivity ==>", "Hittade ett berg:" +mountains[i].getName());
         }
         Log.d("MainActivity", json);
     }
