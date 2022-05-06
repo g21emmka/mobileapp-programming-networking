@@ -1,39 +1,45 @@
 
 # Rapport
 
-**Skriv din rapport här!**
-
-_Du kan ta bort all text som finns sedan tidigare_.
-
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
-
+Jag har lagt till en RecyclerView och en ArrayList. Sedan har jag lagt till en adapter och kopplat ihop denna 
+med RecyclerView:n. 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+ @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        adapter = new MyAdapter();
+        new JsonTask(this).execute(JSON_URL);
+
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager( this));
     }
-}
+```
+Jag har skapat fyra nya klasser: MyViewHolder, MyAdapter, Mountains och Auxdata. Jag har även gett appen
+tillgång till internet genom att jag gå in i filen AndroidManifest.xml och lägga till en uses-permission.
+Därefter har jag lagt till en url med JSON i MainActivity och parsat JSON med hjälp utav GSON. 
+
+```
+   @Override
+    public void onPostExecute(String json) {
+        Gson gson = new Gson();
+        Mountains mountains[];
+        mountains = gson.fromJson(json, Mountains[].class);
+        List<Mountains> newMountains = new ArrayList<>();
+        for (int i = 0; i < mountains.length; i++) {
+            Log.d("MainActivity ==>", "Hittade ett berg:" +mountains[i].getName());
+            newMountains.add(mountains[i]);
+        }
+        Log.d("MainActivity", json);
+        adapter.setMountains(newMountains);
+        adapter.notifyDataSetChanged();
+    }
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
 
-![](android.png)
+![](picture.png)
 
 Läs gärna:
 
